@@ -1,5 +1,22 @@
 <%- include("head"); %>
 
-<center>This is our home page.</center>
+<div class="alert alert-dark" role="alert">
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <% for(var i = 0; i < messages.length; i += 1) { %>
+      <%- messages[i] %>
+    <% } %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  const socket = new WebSocket("ws://localhost:8080");
+
+  socket.addEventListener("open", (event) => {
+    console.log("Connected to WS server");
+  });
+</script>
 
 <%- include("foot"); %>

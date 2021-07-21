@@ -1,7 +1,7 @@
 const express = require("express");
 const session = require("express-session");
 const path = require("path");
-const config = require("../config");
+const db = require("./db.js");
 
 const app = express();
 
@@ -24,9 +24,11 @@ const auth = (req, res, next) => {
   return res.redirect("/login");
 };
 
-app.get("/", auth, (req, res) => {
+app.get("/", auth, async (req, res) => {
+  await db.connect();
   res.render("home", {
-    title: "Local Chat"
+    title: "Local Chat",
+    messages: []
   });
 });
 
@@ -49,8 +51,14 @@ app.post("/login", (req, res) => {
   }
 });
 
-app.listen(config.express.port, config.express.host, () => {
-  console.log(`Webapp listening at http://${config.express.host}:${config.express.port}`);
+app.get("/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/login");
+  });
 });
+
+// app.listen(config.webapp.port, config.webapp.host, () => {
+//   console.log(`Webapp listening at https://${config.webapp.host}:${config.webapp.port}`);
+// });
 
 module.exports = app;

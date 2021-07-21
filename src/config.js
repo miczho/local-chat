@@ -4,7 +4,12 @@ require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const config = module.exports;
 
-config.express = {
-  port: process.env.EXPRESS_PORT || 8080,
+config.webapp = {
+  port: process.env.WEBAPP_PORT || 8080,
+  host: process.env.WEBAPP_HOST || "127.0.0.1"
+};
+
+config.mongo = {
+  port: process.env.MONGO_PORT || 27017,
   host: process.env.EXPRESS_HOST || "127.0.0.1"
 };
