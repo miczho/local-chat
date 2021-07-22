@@ -41,6 +41,10 @@ db.getHistory = async (user) => {
     .sort({ _id: 1 })
     .limit(100)
     .toArray();
+  query.forEach((doc) => {
+    const tmp = doc;
+    tmp.timestamp = tmp._id.getTimestamp().toLocaleString();
+  });
   return query;
 };
 

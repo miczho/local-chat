@@ -1,5 +1,6 @@
 <%- include("head"); %>
 
+<!--
 <div class="alert alert-dark" role="alert">
   <div class="alert alert-success alert-dismissible fade show" role="alert">
     <% for(var i = 0; i < messages.length; i += 1) { %>
@@ -10,13 +11,21 @@
     </button>
   </div>
 </div>
+-->
 
-<script>
-  const socket = new WebSocket("ws://localhost:8080");
+<div class="container">
+    <div id="messages" class="overflow-auto msgs" style="overflow-y: scroll; height:500px;">
+    </div>
+    <form id="msgForm" action="" method="POST" style="bottom:0; margin: 0% 0% 0% 0%;">
+        <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Message" aria-label="Message" id="msg">
+              <div class="input-group-append">
+                <button class="btn btn-success" type="submit" id="sendBtn">Send</button>
+              </div>
+        </div>
+    </form>
+</div>
 
-  socket.addEventListener("open", (event) => {
-    console.log("Connected to WS server");
-  });
-</script>
+<script type="text/javascript" src="chat.js"></script>
 
 <%- include("foot"); %>

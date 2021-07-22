@@ -10,17 +10,16 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+app.use(express.static(path.join(__dirname, "static")));
 app.use(express.urlencoded({ extended: false }));
 app.use(session({
   resave: false,
   saveUninitialized: false,
-  secret: "seqwet"
+  secret: "super sequet"
 }));
 
 const auth = (req, res, next) => {
-  if (req.session && req.session.user) {
-    return next();
-  }
+  if (req.session && req.session.user) return next();
   return res.redirect("/login");
 };
 
@@ -30,6 +29,10 @@ app.get("/", auth, async (req, res) => {
     title: "Local Chat",
     messages: []
   });
+});
+
+app.post("/", (req, res) => {
+  
 });
 
 app.get("/login", (req, res) => {
@@ -56,9 +59,5 @@ app.get("/logout", (req, res) => {
     res.redirect("/login");
   });
 });
-
-// app.listen(config.webapp.port, config.webapp.host, () => {
-//   console.log(`Webapp listening at https://${config.webapp.host}:${config.webapp.port}`);
-// });
 
 module.exports = app;
