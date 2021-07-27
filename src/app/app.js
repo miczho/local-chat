@@ -27,20 +27,21 @@ app.get("/", auth, async (req, res) => {
   await db.connect();
   res.render("home", {
     title: "Local Chat",
+    hideNavOptions: false,
+    user: req.session.user,
     messages: []
   });
 });
 
-app.post("/", (req, res) => {
-  
-});
+app.post("/");
 
 app.get("/login", (req, res) => {
   if (req.session.user) {
     res.redirect("/");
   } else {
     res.render("login", {
-      title: "Local Chat - Login"
+      title: "Local Chat - Login",
+      hideNavOptions: true
     });
   }
 });
@@ -58,6 +59,10 @@ app.get("/logout", (req, res) => {
   req.session.destroy(() => {
     res.redirect("/login");
   });
+});
+
+app.get("/get_name", (req, res) => {
+  res.send({ name: req.session.user });
 });
 
 module.exports = app;

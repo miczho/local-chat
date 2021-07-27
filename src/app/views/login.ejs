@@ -4,16 +4,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
-  width: 360px;
-  padding: 8% 0 0;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
 }
 .form {
   position: relative;
-  z-index: 1;
   background: #FFFFFF;
   max-width: 360px;
-  margin: 0 auto 100px;
+  margin: 0;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
@@ -60,7 +60,6 @@
   display: block;
   clear: both;
 }
-
 </style>
 
 <div class="login-page">
@@ -71,5 +70,14 @@
     </form>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(() => {
+    $(window).resize(() => {
+      const bodyheight = window.innerHeight - 116;
+      $("div.login-page").height(bodyheight);
+    }).resize();
+  });
+</script>
 
 <%- include("foot"); %>

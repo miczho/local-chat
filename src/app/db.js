@@ -16,17 +16,18 @@ db.connect = async () => {
   console.log("Connected to MongoDB");
 };
 
-db.insertMsg = async (user, content) => {
-  const doc = { user, content };
+db.insertMsg = async (user, message) => {
+  const doc = { user, message };
   await database.collection("messages").insertOne(doc);
+  doc.timestamp = doc._id.getTimestamp().toLocaleString();
   return doc;
 };
 
-db.getAllMsgs = async () => {
+db.getAllMsgs = async (limit) => {
   const query = await database.collection("messages")
     .find()
     .sort({ _id: 1 })
-    .limit(100)
+    .limit(limit)
     .toArray();
   query.forEach((doc) => {
     const tmp = doc;
@@ -35,11 +36,11 @@ db.getAllMsgs = async () => {
   return query;
 };
 
-db.getHistory = async (user) => {
+db.getHistory = async (user, limit) => {
   const query = await database.collection("messages")
     .find({ user })
     .sort({ _id: 1 })
-    .limit(100)
+    .limit(limit)
     .toArray();
   query.forEach((doc) => {
     const tmp = doc;
