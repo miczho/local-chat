@@ -2,6 +2,8 @@
 
 Made with [node.js](https://nodejs.org/en/download/) (v14.16.1) and [MongoDB](https://www.mongodb.com/try/download/community) (v4.4.7)
 
+<img src="https://raw.githubusercontent.com/kopokopok/local-chat/main/img/demo.gif"/>
+
 ## Mission Statement
 
 This webapp was built to achieve a greater understanding of databases, REST protocol, websockets, and fullstack programming in general.
