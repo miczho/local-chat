@@ -69,17 +69,17 @@ module.exports = (app) => {
     });
   });
 
-  app.get("/get_name", (req, res) => {
+  app.get("/get_name", auth, (req, res) => {
     res.send({ name: req.session.user });
   });
 
-  app.get("/get_all_messages", async (req, res) => {
+  app.get("/get_all_messages", auth, async (req, res) => {
     await db.connect();
     const msgs = await db.getAllMsgs(100);
     res.send(msgs);
   });
 
-  app.get("/get_history", async (req, res) => {
+  app.get("/get_history", auth, async (req, res) => {
     await db.connect();
     const msgs = await db.getHistory(req.session.user, 100);
     res.send(msgs);
