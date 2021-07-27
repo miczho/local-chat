@@ -14,7 +14,7 @@
   "rules": {
     "no-console": "off",
     "semi": ["error", "always"],
-    "quotes": ["error", "double"],
+    "quotes": ["error", "double", { "avoidEscape": true }],
     "linebreak-style": ["error", "unix"],
     "comma-dangle": ["error", "never"],
     "no-cond-assign": ["error", "always"],

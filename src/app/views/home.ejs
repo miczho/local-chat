@@ -1,55 +1,37 @@
 <%- include("head"); %>
 
 <style type="text/css">
-  /* Chat containers */
+  @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
   #chat-board {
     border: 2px solid #dedede;
     background-color: #f1f1f1;
     border-radius: 5px;
     padding: 10px;
   }
+  
+  .form-control {
+    font-family: "Roboto", sans-serif;
+  }
 
-  /* Darker chat container */
+  .chat-box {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0px 5px 0px;
+  }
+  
   .darker {
-    border-color: #ccc;
     background-color: #ddd;
   }
 
-  /* Clear floats */
-  .chat-box::after {
-    content: "";
-    clear: both;
-    display: table;
+  .chat-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 0px;
+    margin-right: 0px;
   }
-
-  /* Style images */
-  .chat-box b {
-    float: left;
-    max-width: 60px;
-    width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
-  }
-
-  /* Style the right image */
-  .chat-box b.right {
-    float: right;
-    margin-left: 20px;
-    margin-right:0;
-  }
-
-  /* Style time text */
-  .time-right {
-    float: right;
-    color: #aaa;
-  }
-
-  /* Style time text */
-  .time-left {
-    float: left;
-    color: #999;
-  }
-
 </style>
 
 <div style="padding-top:10px;" >
@@ -71,6 +53,50 @@
   </div>
 </div>
 
-<script type="text/javascript" src="chat.js"></script>
+<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript">
+  $(document).ready(() => {
+    $(window).resize(() => {
+      const bodyheight = window.innerHeight - 222;
+      $("#messages").height(bodyheight);
+    }).resize();
+  });
+</script>
+<script type="text/javascript">
+  window.onload = async () => {
+    const msgs = await loadAllMsgs();
+    for (let i = 0; i < msgs.length; i+= 1) {
+      let scroll = false;
+      if (i === msgs.length - 1) {
+        scroll = true;
+      }
+      addMsg(msgs[i], scroll);
+    }
+  };
+
+  const socket = new WebSocket(`ws://${window.location.hostname}:${window.location.port}`);
+  socket.addEventListener("open", () => {
+    console.log("Connected to WS server");
+
+    $("#msgForm").on("submit", async (e) => {
+      e.preventDefault();
+
+      const msgInput = document.getElementById("msg");
+      const userInput = msgInput.value;
+      if (userInput !== "") {
+        const userName = await loadName();
+
+        msgInput.value = "";
+
+        socket.send(JSON.stringify({ name: userName, message: userInput }));
+      }
+    });
+  });
+
+  socket.addEventListener("message", (event) => {
+    const data = JSON.parse(event.data);
+    addMsg(data, true);
+  });
+</script>
 
 <%- include("foot"); %>

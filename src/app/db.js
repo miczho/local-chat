@@ -48,13 +48,3 @@ db.getHistory = async (user, limit) => {
   });
   return query;
 };
-
-// async function test() {
-//   await db.connect();
-//   await db.insertMsg("bob", "msg1");
-//   await db.insertMsg("timmy", "msg2");
-//   console.log(await db.getHistory("timmy"));
-//   console.log(await db.getAllMsgs());
-// }
-
-// test()
