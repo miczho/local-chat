@@ -41,14 +41,6 @@
 
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript">
-  $(document).ready(() => {
-    $(window).resize(() => {
-      const bodyheight = window.innerHeight - 222;
-      $("#messages").height(bodyheight);
-    }).resize();
-  });
-</script>
-<script type="text/javascript">
   window.onload = async () => {
     const msgs = await loadHistory();
     for (let i = 0; i < msgs.length; i+= 1) {
@@ -59,6 +51,13 @@
       addMsg(msgs[i], scroll);
     }
   };
+  
+  $(document).ready(() => {
+    $(window).resize(() => {
+      const bodyheight = window.innerHeight - 222;
+      $("#messages").height(bodyheight);
+    }).resize();
+  });
 </script>
 
 <%- include("foot"); %>
