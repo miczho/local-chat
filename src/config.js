@@ -6,7 +6,7 @@ const config = module.exports;
 
 config.webapp = {
   port: process.env.WEBAPP_PORT || 8080,
-  host: process.env.WEBAPP_HOST || "127.0.0.1"
+  host: process.env.WEBAPP_HOST || "0.0.0.0"
 };
 
 config.mongo = {
