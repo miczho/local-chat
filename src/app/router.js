@@ -16,11 +16,18 @@ module.exports = (app) => {
   app.use(flash());
 
   const auth = (req, res, next) => {
+    /*
+    Redirects client to the login page if they are not signed in.
+    Pass this to the routes that need to check for authentication.
+    */
     if (req.session && req.session.user) return next();
     return res.redirect("/login");
   };
 
   app.get("/", auth, (req, res) => {
+    /*
+    Displays homepage if logged in.
+    */
     res.render("home", {
       title: "Local Chat",
       hideNavOptions: false,
@@ -28,9 +35,13 @@ module.exports = (app) => {
     });
   });
 
+  // Allows for submittion of a message.
   app.post("/");
 
   app.get("/history", auth, (req, res) => {
+    /*
+    Displays message history of the current user.
+    */
     res.render("history", {
       title: "Local Chat",
       hideNavOptions: false
@@ -70,16 +81,25 @@ module.exports = (app) => {
   });
 
   app.get("/get_name", auth, (req, res) => {
+    /*
+    Sends an Object containing the current user's name.
+    */
     res.send({ name: req.session.user });
   });
 
   app.get("/get_all_messages", auth, async (req, res) => {
+    /*
+    Sends the last 100 messages (or less) as an Array of Objects.
+    */
     await db.connect();
     const msgs = await db.getAllMsgs(100);
     res.send(msgs);
   });
 
   app.get("/get_history", auth, async (req, res) => {
+    /*
+    Sends the last 100 messages (or less) of the current user as an Array of Objects.
+    */
     await db.connect();
     const msgs = await db.getHistory(req.session.user, 100);
     res.send(msgs);

@@ -13,6 +13,11 @@ wss.on("connection", (ws) => {
   console.log("New WS connection detected");
 
   ws.on("message", async (data) => {
+    /*
+    data :: Stringified Object
+
+    Saves message data once recieved from web server. Sends saved message to all clients.
+    */
     const parsedData = JSON.parse(data);
     await db.connect();
     const savedData = await db.insertMsg(parsedData.name, parsedData.message);

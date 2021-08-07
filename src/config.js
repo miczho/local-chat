@@ -1,9 +1,11 @@
 const path = require("path");
 
+// set custom environment variables with .env file
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const config = module.exports;
 
+// default values are set if the variables are not defined in .env
 config.webapp = {
   port: process.env.WEBAPP_PORT || 8080,
   host: process.env.WEBAPP_HOST || "0.0.0.0"

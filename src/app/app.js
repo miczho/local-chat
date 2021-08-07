@@ -7,6 +7,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// set webapp routes
 require("./router.js")(app);
 
 module.exports = app;
