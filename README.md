@@ -4,7 +4,7 @@ Made with [node.js](https://nodejs.org/en/download/) (v14.16.1) and [MongoDB](ht
 
 <img src="https://raw.githubusercontent.com/kopokopok/local-chat/main/img/demo.gif"/>
 
-** UPDATE ** The app is now hosted online via Heroku and MongoDB Atlas.
+** UPDATE ** The app is now hosted online via Heroku and MongoDB Atlas ([https://local-chat-202.herokuapp.com/](https://local-chat-202.herokuapp.com/)).
 
 ## Mission Statement
 
