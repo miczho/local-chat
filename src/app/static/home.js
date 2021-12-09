@@ -13,7 +13,7 @@ $(document).ready(() => {
   }).resize();
 });
 
-const socket = new WebSocket(`ws://${window.location.hostname}:${window.location.port}`);
+const socket = new WebSocket(`wss://${window.location.hostname}:${window.location.port}`);
 socket.addEventListener("open", () => {
   console.log("Connected to WS server");
 
