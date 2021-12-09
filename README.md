@@ -4,15 +4,18 @@ Made with [node.js](https://nodejs.org/en/download/) (v14.16.1) and [MongoDB](ht
 
 <img src="https://raw.githubusercontent.com/kopokopok/local-chat/main/img/demo.gif"/>
 
+** UPDATE ** The app is now hosted online via Heroku and MongoDB Atlas.
+
 ## Mission Statement
 
 This webapp was built to achieve a greater understanding of databases, REST protocol, websockets, and fullstack programming in general.
 
 Notable languages and tools that were used include:
 - Express
-- EJS
+- AJAX
 - MongoDB
 - Websockets
+- Heroku
 
 ## Setup
 
