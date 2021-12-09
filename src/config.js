@@ -7,8 +7,8 @@ const config = module.exports;
 
 // default values are set if the variables are not defined in .env
 config.webapp = {
-  port: process.env.WEBAPP_PORT || 8080,
-  host: process.env.WEBAPP_HOST || "0.0.0.0"
+  port: process.env.PORT || 8080,
+  host: process.env.HOST || "0.0.0.0"
 };
 
 config.mongo = {
