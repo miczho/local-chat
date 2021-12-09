@@ -11,8 +11,7 @@ db.connect = async () => {
   */
   if (database) return;
 
-  const url = `mongodb://${config.mongo.host}:${config.mongo.port}`;
-  const client = new MongoClient(url);
+  const client = new MongoClient(config.mongo.uri);
   await client.connect().catch((err) => { throw err; });
   database = client.db("localChat");
   await database.command({ ping: 1 });

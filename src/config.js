@@ -12,6 +12,5 @@ config.webapp = {
 };
 
 config.mongo = {
-  port: process.env.MONGO_PORT || 27017,
-  host: process.env.EXPRESS_HOST || "127.0.0.1"
+  uri: process.env.MONGODB_URI  || "mongodb://127.0.0.1:27017/localChat"
 };
