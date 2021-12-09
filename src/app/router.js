@@ -35,9 +35,6 @@ module.exports = (app) => {
     });
   });
 
-  // Allows for submittion of a message.
-  app.post("/");
-
   app.get("/history", auth, (req, res) => {
     /*
     Displays message history of the current user.
