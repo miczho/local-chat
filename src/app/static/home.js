@@ -1,3 +1,9 @@
+let socket;
+
+function setupWebSocket() {
+  socket = new WebSocket(`${(window.location.protocol === "https:") ? "wss" : "ws"}://${window.location.hostname}:${window.location.port}`);
+}
+
 window.onload = async () => {
   const msgs = await loadAllMsgs();
   for (let i = 0; i < msgs.length; i += 1) {
@@ -13,7 +19,7 @@ $(document).ready(() => {
   }).resize();
 });
 
-const socket = new WebSocket(`${(window.location.protocol === "https:") ? "wss" : "ws"}://${window.location.hostname}:${window.location.port}`);
+setupWebSocket();
 socket.addEventListener("open", () => {
   console.log("Connected to WS server");
 
@@ -30,6 +36,10 @@ socket.addEventListener("open", () => {
       socket.send(JSON.stringify({ name: userName, message: userInput }));
     }
   });
+});
+
+socket.addEventListener("close", () => {
+  setTimeout(setupWebSocket, 1000);
 });
 
 socket.addEventListener("message", (event) => {
